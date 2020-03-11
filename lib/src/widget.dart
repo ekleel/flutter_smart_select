@@ -17,16 +17,11 @@ typedef void SmartSelectOnChange<T>(T value);
 typedef void SmartSelectShowModal(BuildContext context);
 
 /// Builder for custom trigger widget
-typedef Widget SmartSelectBuilder<T>(
-  BuildContext context,
-  SmartSelectState<T> state,
-  SmartSelectShowModal showChoices
-);
+typedef Widget SmartSelectBuilder<T>(BuildContext context, SmartSelectState<T> state, SmartSelectShowModal showChoices);
 
 /// SmartSelect that allows you to easily convert your usual form selects
 /// to dynamic pages with grouped radio or checkbox inputs.
 class SmartSelect<T> extends StatelessWidget {
-
   /// The primary content of the widget.
   /// Used in trigger widget and header option
   final String title;
@@ -151,17 +146,18 @@ class SmartSelect<T> extends StatelessWidget {
     this.choiceConfig = const SmartSelectChoiceConfig(),
     this.modalConfig = const SmartSelectModalConfig(),
     this.builder,
-  }) : assert(choiceType == SmartSelectChoiceType.radios || choiceType == SmartSelectChoiceType.chips, 'SmartSelect.single only support SmartSelectChoiceType.radios and SmartSelectChoiceType.chips'),
-    isMultiChoice = false,
-    _onChangeMultiple = null,
-    _onChangeSingle = onChange,
-    _state =  SmartSelectState<T>.single(
-      value,
-      title: title,
-      options: options,
-      placeholder: placeholder,
-    ),
-    super(key: key);
+  })  : assert(choiceType == SmartSelectChoiceType.radios || choiceType == SmartSelectChoiceType.chips,
+            'SmartSelect.single only support SmartSelectChoiceType.radios and SmartSelectChoiceType.chips'),
+        isMultiChoice = false,
+        _onChangeMultiple = null,
+        _onChangeSingle = onChange,
+        _state = SmartSelectState<T>.single(
+          value,
+          title: title,
+          options: options,
+          placeholder: placeholder,
+        ),
+        super(key: key);
 
   /// Constructor for multiple choice
   SmartSelect.multiple({
@@ -185,36 +181,40 @@ class SmartSelect<T> extends StatelessWidget {
     this.choiceConfig = const SmartSelectChoiceConfig(),
     this.modalConfig = const SmartSelectModalConfig(),
     this.builder,
-  }) : assert(choiceType == SmartSelectChoiceType.checkboxes || choiceType == SmartSelectChoiceType.switches || choiceType == SmartSelectChoiceType.chips, 'SmartSelect.multiple only support SmartSelectChoiceType.checkboxes, SmartSelectChoiceType.switches and SmartSelectChoiceType.chips'),
-    isMultiChoice = true,
-    _onChangeSingle = null,
-    _onChangeMultiple = onChange,
-    _state = SmartSelectState<T>.multiple(
-      value ?? [],
-      title: title,
-      options: options,
-      placeholder: placeholder,
-    ),
-    super(key: key);
+  })  : assert(
+            choiceType == SmartSelectChoiceType.checkboxes ||
+                choiceType == SmartSelectChoiceType.switches ||
+                choiceType == SmartSelectChoiceType.chips,
+            'SmartSelect.multiple only support SmartSelectChoiceType.checkboxes, SmartSelectChoiceType.switches and SmartSelectChoiceType.chips'),
+        isMultiChoice = true,
+        _onChangeSingle = null,
+        _onChangeMultiple = onChange,
+        _state = SmartSelectState<T>.multiple(
+          value ?? [],
+          title: title,
+          options: options,
+          placeholder: placeholder,
+        ),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return builder != null
-      ? builder(context, _state, this._showModal)
-      : SmartSelectTile(
-          title: title,
-          value: _state.valueDisplay,
-          leading: leading,
-          trailing: trailing,
-          loadingText: loadingText,
-          isLoading: isLoading,
-          isTwoLine: isTwoLine,
-          enabled: enabled,
-          selected: selected,
-          dense: dense,
-          padding: padding,
-          onTap: () => this._showModal(context),
-        );
+        ? builder(context, _state, this._showModal)
+        : SmartSelectTile(
+            title: title,
+            value: _state.valueDisplay,
+            leading: leading,
+            trailing: trailing,
+            loadingText: loadingText,
+            isLoading: isLoading,
+            isTwoLine: isTwoLine,
+            enabled: enabled,
+            selected: selected,
+            dense: dense,
+            padding: padding,
+            onTap: () => this._showModal(context),
+          );
   }
 
   void _showModal(BuildContext context) async {
@@ -252,14 +252,9 @@ class SmartSelect<T> extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SmartSelectStateSelected<T>>(
           create: (_) => isMultiChoice == true
-            ? SmartSelectStateSelected<T>.multiple(
-                List.from(_state.values) ?? [],
-                useConfirmation: modalConfig.useConfirmation
-              )
-            : SmartSelectStateSelected<T>.single(
-                _state.value,
-                useConfirmation: modalConfig.useConfirmation
-              ),
+              ? SmartSelectStateSelected<T>.multiple(List.from(_state.values) ?? [],
+                  useConfirmation: modalConfig.useConfirmation)
+              : SmartSelectStateSelected<T>.single(_state.value, useConfirmation: modalConfig.useConfirmation),
         ),
         ChangeNotifierProvider<SmartSelectStateFilter>(
           create: (_) => SmartSelectStateFilter(),
@@ -333,3 +328,90 @@ class SmartSelect<T> extends StatelessWidget {
   }
 }
 
+/// SmartSelectTrigger that allows you to trigger smart select without widget
+class SmartSelectTrigger {
+  static Future<bool> showModal<T>({BuildContext context, SmartSelect<T> smartSelect}) async {
+    bool confirmed = false;
+    BuildContext _context;
+
+    Widget _routeWidget = MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SmartSelectStateSelected<T>>(
+          create: (_) => smartSelect.isMultiChoice == true
+              ? SmartSelectStateSelected<T>.multiple(List.from(smartSelect._state.values) ?? [],
+                  useConfirmation: smartSelect.modalConfig.useConfirmation)
+              : SmartSelectStateSelected<T>.single(smartSelect._state.value,
+                  useConfirmation: smartSelect.modalConfig.useConfirmation),
+        ),
+        ChangeNotifierProvider<SmartSelectStateFilter>(
+          create: (_) => SmartSelectStateFilter(),
+        ),
+      ],
+      child: Builder(
+        builder: (_) {
+          _context = _;
+          return SmartSelectModal(
+            title: smartSelect.title,
+            type: smartSelect.modalType,
+            config: smartSelect.modalConfig,
+            choices: Consumer<SmartSelectStateFilter>(
+              builder: (context, state, _) {
+                return SmartSelectChoices<T>(
+                  type: smartSelect.choiceType,
+                  config: smartSelect.choiceConfig,
+                  query: state.query,
+                  items: smartSelect.options,
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
+
+    switch (smartSelect.modalType) {
+      case SmartSelectModalType.fullPage:
+        confirmed = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => _routeWidget),
+        );
+        break;
+      case SmartSelectModalType.bottomSheet:
+        confirmed = await showModalBottomSheet(
+          context: context,
+          shape: smartSelect.modalConfig.style.shape,
+          backgroundColor: smartSelect.modalConfig.style.backgroundColor,
+          elevation: smartSelect.modalConfig.style.elevation,
+          builder: (_) => _routeWidget,
+        );
+        break;
+      case SmartSelectModalType.popupDialog:
+        confirmed = await showDialog(
+          context: context,
+          builder: (_) => Dialog(
+            shape: smartSelect.modalConfig.style.shape,
+            backgroundColor: smartSelect.modalConfig.style.backgroundColor,
+            elevation: smartSelect.modalConfig.style.elevation,
+            child: _routeWidget,
+          ),
+        );
+        break;
+    }
+
+    // dont return value if modal need confirmation and not confirmed
+    if (smartSelect.modalConfig.useConfirmation == true && confirmed != true) return null;
+
+    if (smartSelect.isMultiChoice == true) {
+      // get selected value(s)
+      List<T> selected = Provider.of<SmartSelectStateSelected<T>>(_context, listen: false).values;
+      // return value
+      if (selected != null) smartSelect._onChangeMultiple?.call(selected);
+    } else {
+      // get selected value(s)
+      T selected = Provider.of<SmartSelectStateSelected<T>>(_context, listen: false).value;
+      // return value
+      if (selected != null) smartSelect._onChangeSingle?.call(selected);
+    }
+    return confirmed;
+  }
+}

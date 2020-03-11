@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import './single_prog.dart';
 import './single_page.dart';
 import './single_sheet.dart';
 import './single_popup.dart';
@@ -12,7 +13,6 @@ class FeaturesSingle extends StatefulWidget {
 }
 
 class _FeaturesSingleState extends State<FeaturesSingle> with AutomaticKeepAliveClientMixin<FeaturesSingle> {
-
   @override
   bool get wantKeepAlive => true;
 
@@ -20,8 +20,12 @@ class _FeaturesSingleState extends State<FeaturesSingle> with AutomaticKeepAlive
   Widget build(BuildContext context) {
     super.build(context);
     return Scrollbar(
-      child:ListView(
+      child: ListView(
         children: <Widget>[
+          StickyHeader(
+            header: FeaturesHeader('Open Progmatically'),
+            content: FeaturesSingleProg(),
+          ),
           StickyHeader(
             header: FeaturesHeader('Open in Full Page'),
             content: FeaturesSinglePage(),
@@ -43,4 +47,3 @@ class _FeaturesSingleState extends State<FeaturesSingle> with AutomaticKeepAlive
     );
   }
 }
-
