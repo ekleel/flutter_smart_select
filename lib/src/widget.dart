@@ -330,7 +330,7 @@ class SmartSelect<T> extends StatelessWidget {
 
 /// SmartSelectTrigger that allows you to trigger smart select without widget
 class SmartSelectTrigger {
-  static Future<bool> showModal<T>({BuildContext context, SmartSelect<T> smartSelect}) async {
+  static Future<List> showModal<T>({BuildContext context, SmartSelect<T> smartSelect}) async {
     bool confirmed = false;
     BuildContext _context;
 
@@ -406,12 +406,13 @@ class SmartSelectTrigger {
       List<T> selected = Provider.of<SmartSelectStateSelected<T>>(_context, listen: false).values;
       // return value
       if (selected != null) smartSelect._onChangeMultiple?.call(selected);
+      return selected;
     } else {
       // get selected value(s)
       T selected = Provider.of<SmartSelectStateSelected<T>>(_context, listen: false).value;
       // return value
       if (selected != null) smartSelect._onChangeSingle?.call(selected);
+      return [selected];
     }
-    return confirmed;
   }
 }
