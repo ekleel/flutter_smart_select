@@ -295,7 +295,7 @@ class SmartSelect<T> extends StatelessWidget {
           context: context,
           shape: modalConfig.style.shape,
           backgroundColor: Colors.transparent,
-          barrierColor: modalConfig.style.barrierColor.withOpacity(0.6),
+          barrierColor: modalConfig.style.barrierColor.withOpacity(0.35),
           elevation: modalConfig.style.elevation,
           builder: (BuildContext context) => Stack(
             alignment: Alignment.bottomCenter,
@@ -420,7 +420,7 @@ class SmartSelectTrigger {
           context: context,
           shape: smartSelect.modalConfig.style.shape,
           backgroundColor: Colors.transparent,
-          barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.6),
+          barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.35),
           elevation: smartSelect.modalConfig.style.elevation,
           builder: (BuildContext context) => Stack(
             alignment: Alignment.bottomCenter,
