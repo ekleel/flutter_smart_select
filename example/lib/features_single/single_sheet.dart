@@ -8,7 +8,6 @@ class FeaturesSingleSheet extends StatefulWidget {
 }
 
 class _FeaturesSingleSheetState extends State<FeaturesSingleSheet> {
-
   String _os = 'win';
   String _hero = 'iro';
 
@@ -27,6 +26,18 @@ class _FeaturesSingleSheetState extends State<FeaturesSingleSheet> {
           ),
           onChange: (val) => setState(() => _os = val),
           modalType: SmartSelectModalType.bottomSheet,
+          modalConfig: SmartSelectModalConfig(
+            constraints: BoxConstraints(maxWidth: 400, maxHeight: 300),
+            style: SmartSelectModalStyle(
+              barrierColor: Colors.blue,
+              shape: const RoundedRectangleBorder(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(10.0),
+                  topLeft: Radius.circular(10.0),
+                ),
+              ),
+            ),
+          ),
         ),
         Divider(indent: 20),
         SmartSelect<String>.single(

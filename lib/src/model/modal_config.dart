@@ -44,6 +44,8 @@ class SmartSelectModalConfig {
 
   final BoxConstraints constraints;
 
+  final BorderRadius borderRadius;
+
   /// Create modal configuration
   const SmartSelectModalConfig({
     this.title,
@@ -58,5 +60,9 @@ class SmartSelectModalConfig {
     this.confirmationBuilder,
     this.barrierDismissible = true,
     this.constraints,
+    this.borderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+    ),
   });
 }

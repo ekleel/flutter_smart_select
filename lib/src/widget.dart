@@ -294,10 +294,30 @@ class SmartSelect<T> extends StatelessWidget {
         confirmed = await showModalBottomSheet(
           context: context,
           shape: modalConfig.style.shape,
-          backgroundColor: modalConfig.style.backgroundColor,
-          barrierColor: modalConfig.style.barrierColor,
+          backgroundColor: Colors.transparent,
+          barrierColor: modalConfig.style.barrierColor.withOpacity(0.6),
           elevation: modalConfig.style.elevation,
-          builder: (_) => _routeWidget,
+          // builder: (_) => _routeWidget,
+          builder: (BuildContext context) => Column(
+            children: [
+              Expanded(
+                child: Container(
+                  constraints: modalConfig.constraints,
+                  decoration: BoxDecoration(
+                    color: modalConfig.style.backgroundColor,
+                    borderRadius: modalConfig.borderRadius,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: modalConfig.borderRadius,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: _routeWidget,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
         break;
       case SmartSelectModalType.popupDialog:
@@ -393,7 +413,26 @@ class SmartSelectTrigger {
           backgroundColor: smartSelect.modalConfig.style.backgroundColor,
           barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.35),
           elevation: smartSelect.modalConfig.style.elevation,
-          builder: (_) => _routeWidget,
+          builder: (BuildContext context) => Column(
+            children: [
+              Expanded(
+                child: Container(
+                  constraints: smartSelect.modalConfig.constraints,
+                  decoration: BoxDecoration(
+                    color: smartSelect.modalConfig.style.backgroundColor,
+                    borderRadius: smartSelect.modalConfig.borderRadius,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: smartSelect.modalConfig.borderRadius,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: _routeWidget,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
         break;
       case SmartSelectModalType.popupDialog:

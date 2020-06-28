@@ -31,6 +31,16 @@ List<SmartSelectOption<String>> os = [
   SmartSelectOption<String>(value: 'mac', title: 'Macintos'),
   SmartSelectOption<String>(value: 'tux', title: 'Linux'),
   SmartSelectOption<String>(value: 'win', title: 'Windows'),
+  SmartSelectOption<String>(value: 'and', title: 'Android'),
+  SmartSelectOption<String>(value: 'ios', title: 'IOS'),
+  SmartSelectOption<String>(value: 'mac', title: 'Macintos'),
+  SmartSelectOption<String>(value: 'tux', title: 'Linux'),
+  SmartSelectOption<String>(value: 'win', title: 'Windows'),
+  SmartSelectOption<String>(value: 'and', title: 'Android'),
+  SmartSelectOption<String>(value: 'ios', title: 'IOS'),
+  SmartSelectOption<String>(value: 'mac', title: 'Macintos'),
+  SmartSelectOption<String>(value: 'tux', title: 'Linux'),
+  SmartSelectOption<String>(value: 'win', title: 'Windows'),
 ];
 
 List<SmartSelectOption<String>> heroes = [

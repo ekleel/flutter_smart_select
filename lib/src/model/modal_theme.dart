@@ -22,7 +22,7 @@ class SmartSelectModalStyle {
     this.shape,
     this.elevation,
     this.barrierColor = Colors.black54,
-    this.backgroundColor,
+    this.backgroundColor = Colors.white,
   });
 }
 
