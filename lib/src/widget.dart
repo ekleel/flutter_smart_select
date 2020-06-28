@@ -300,26 +300,21 @@ class SmartSelect<T> extends StatelessWidget {
         );
         break;
       case SmartSelectModalType.popupDialog:
+        // final horPadding = MediaQuery.of(context).size.width;
         confirmed = await showModal(
           context: context,
           configuration: FadeScaleTransitionConfiguration(
             barrierColor: modalConfig.style.barrierColor.withOpacity(0.6),
             barrierDismissible: modalConfig.barrierDismissible,
           ),
-          builder: (BuildContext context) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                constraints: modalConfig.constraints,
-                child: Dialog(
-                  shape: modalConfig.style.shape,
-                  backgroundColor: modalConfig.style.backgroundColor,
-                  elevation: modalConfig.style.elevation,
-                  child: _routeWidget,
-                ),
-              ),
-            ],
+          builder: (_) => Dialog(
+            shape: modalConfig.style.shape,
+            backgroundColor: modalConfig.style.backgroundColor,
+            elevation: modalConfig.style.elevation,
+            child: Container(
+              constraints: modalConfig.constraints,
+              child: _routeWidget,
+            ),
           ),
           // builder: (_) => Dialog(
           //   shape: modalConfig.style.shape,
@@ -412,20 +407,14 @@ class SmartSelectTrigger {
             barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.6),
             barrierDismissible: smartSelect.modalConfig.barrierDismissible,
           ),
-          builder: (BuildContext context) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                constraints: smartSelect.modalConfig.constraints,
-                child: Dialog(
-                  shape: smartSelect.modalConfig.style.shape,
-                  backgroundColor: smartSelect.modalConfig.style.backgroundColor,
-                  elevation: smartSelect.modalConfig.style.elevation,
-                  child: _routeWidget,
-                ),
-              ),
-            ],
+          builder: (_) => Dialog(
+            shape: smartSelect.modalConfig.style.shape,
+            backgroundColor: smartSelect.modalConfig.style.backgroundColor,
+            elevation: smartSelect.modalConfig.style.elevation,
+            child: Container(
+              constraints: smartSelect.modalConfig.constraints,
+              child: _routeWidget,
+            ),
           ),
         );
         break;
