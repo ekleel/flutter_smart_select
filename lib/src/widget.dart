@@ -410,8 +410,8 @@ class SmartSelectTrigger {
         confirmed = await showModalBottomSheet(
           context: context,
           shape: smartSelect.modalConfig.style.shape,
-          backgroundColor: smartSelect.modalConfig.style.backgroundColor,
-          barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.35),
+          backgroundColor: Colors.transparent,
+          barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.6),
           elevation: smartSelect.modalConfig.style.elevation,
           builder: (BuildContext context) => Column(
             children: [
