@@ -297,24 +297,33 @@ class SmartSelect<T> extends StatelessWidget {
           backgroundColor: Colors.transparent,
           barrierColor: modalConfig.style.barrierColor.withOpacity(0.6),
           elevation: modalConfig.style.elevation,
-          // builder: (_) => _routeWidget,
-          builder: (BuildContext context) => Column(
+          builder: (BuildContext context) => Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Expanded(
-                child: Container(
-                  constraints: modalConfig.constraints,
-                  decoration: BoxDecoration(
-                    color: modalConfig.style.backgroundColor,
-                    borderRadius: modalConfig.borderRadius,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: modalConfig.borderRadius,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: _routeWidget,
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      constraints: modalConfig.constraints,
+                      decoration: BoxDecoration(
+                        color: modalConfig.style.backgroundColor,
+                        borderRadius: modalConfig.borderRadius,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: modalConfig.borderRadius,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: _routeWidget,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
@@ -413,23 +422,33 @@ class SmartSelectTrigger {
           backgroundColor: Colors.transparent,
           barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.6),
           elevation: smartSelect.modalConfig.style.elevation,
-          builder: (BuildContext context) => Column(
+          builder: (BuildContext context) => Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Expanded(
-                child: Container(
-                  constraints: smartSelect.modalConfig.constraints,
-                  decoration: BoxDecoration(
-                    color: smartSelect.modalConfig.style.backgroundColor,
-                    borderRadius: smartSelect.modalConfig.borderRadius,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: smartSelect.modalConfig.borderRadius,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: _routeWidget,
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      constraints: smartSelect.modalConfig.constraints,
+                      decoration: BoxDecoration(
+                        color: smartSelect.modalConfig.style.backgroundColor,
+                        borderRadius: smartSelect.modalConfig.borderRadius,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: smartSelect.modalConfig.borderRadius,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: _routeWidget,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
