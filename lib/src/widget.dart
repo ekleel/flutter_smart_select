@@ -295,6 +295,7 @@ class SmartSelect<T> extends StatelessWidget {
           context: context,
           shape: modalConfig.style.shape,
           backgroundColor: modalConfig.style.backgroundColor,
+          barrierColor: modalConfig.style.barrierColor,
           elevation: modalConfig.style.elevation,
           builder: (_) => _routeWidget,
         );
@@ -316,12 +317,6 @@ class SmartSelect<T> extends StatelessWidget {
               child: _routeWidget,
             ),
           ),
-          // builder: (_) => Dialog(
-          //   shape: modalConfig.style.shape,
-          //   backgroundColor: modalConfig.style.backgroundColor,
-          //   elevation: modalConfig.style.elevation,
-          //   child: _routeWidget,
-          // ),
         );
         break;
     }
@@ -396,6 +391,7 @@ class SmartSelectTrigger {
           context: context,
           shape: smartSelect.modalConfig.style.shape,
           backgroundColor: smartSelect.modalConfig.style.backgroundColor,
+          barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.35),
           elevation: smartSelect.modalConfig.style.elevation,
           builder: (_) => _routeWidget,
         );
