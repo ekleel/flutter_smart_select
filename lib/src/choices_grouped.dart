@@ -6,19 +6,12 @@ import './model/option.dart';
 import './choices_list.dart';
 
 class SmartSelectChoicesGrouped<T> extends StatelessWidget {
-
   final List<String> groupKeys;
   final List<SmartSelectOption<T>> items;
   final SmartSelectChoiceType type;
   final SmartSelectChoiceConfig<T> config;
 
-  SmartSelectChoicesGrouped(
-    this.groupKeys,
-    this.items,
-    this.type,
-    this.config,
-    { Key key }
-  ) : super(key: key);
+  SmartSelectChoicesGrouped(this.groupKeys, this.items, this.type, this.config, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +22,8 @@ class SmartSelectChoicesGrouped<T> extends StatelessWidget {
         List<SmartSelectOption<T>> groupItems = _groupItems(groupKey);
         return StickyHeader(
           content: SmartSelectChoicesList<T>(groupItems, type, config),
-          header: config.groupHeaderBuilder?.call(groupKey, groupItems.length)
-            ?? SmartSelectChoicesGroupedHeader(
+          header: config.groupHeaderBuilder?.call(groupKey, groupItems.length) ??
+              SmartSelectChoicesGroupedHeader(
                 title: groupKey,
                 counter: groupItems.length,
                 theme: config.groupHeaderStyle,
@@ -47,7 +40,6 @@ class SmartSelectChoicesGrouped<T> extends StatelessWidget {
 }
 
 class SmartSelectChoicesGroupedHeader extends StatelessWidget {
-
   final String title;
   final int counter;
   final SmartSelectChoiceGroupHeaderStyle theme;
@@ -71,17 +63,11 @@ class SmartSelectChoicesGroupedHeader extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .body2
-                .merge(theme.textStyle),
+            style: Theme.of(context).textTheme.bodyText1.merge(theme.textStyle),
           ),
           Text(
             counter.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .body2
-                .merge(theme.textStyle),
+            style: Theme.of(context).textTheme.bodyText1.merge(theme.textStyle),
           ),
         ],
       ),

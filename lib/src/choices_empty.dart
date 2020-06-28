@@ -12,26 +12,17 @@ class SmartSelectChoicesEmpty extends StatelessWidget {
             Container(height: 25),
             Text(
               'Whoops, no matches',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline
-                  .merge(TextStyle(color: Colors.black54)),
+              style: Theme.of(context).textTheme.headline5.merge(TextStyle(color: Colors.black54)),
             ),
             Container(height: 7),
             Text(
               "We couldn't find any search result",
-              style: Theme.of(context)
-                  .textTheme
-                  .subhead
-                  .merge(TextStyle(color: Colors.black45)),
+              style: Theme.of(context).textTheme.subtitle1.merge(TextStyle(color: Colors.black45)),
             ),
             Container(height: 7),
             Text(
               "Give it another go",
-              style: Theme.of(context)
-                  .textTheme
-                  .subhead
-                  .merge(TextStyle(color: Colors.black45)),
+              style: Theme.of(context).textTheme.subtitle1.merge(TextStyle(color: Colors.black45)),
             )
           ],
         ),

@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:ui';
 
 /// Configure modal style
 class SmartSelectModalStyle {
-
   /// Modal border shape
   /// used in popup dialog and bottom sheet
   final ShapeBorder shape;
@@ -15,17 +15,19 @@ class SmartSelectModalStyle {
   /// Modal background color
   final Color backgroundColor;
 
+  final Color barrierColor;
+
   /// Create a configuration of modal style
   const SmartSelectModalStyle({
     this.shape,
     this.elevation,
+    this.barrierColor = Colors.black54,
     this.backgroundColor,
   });
 }
 
 /// Configure modal option header style
 class SmartSelectModalHeaderStyle {
-
   /// Header border shape
   final ShapeBorder shape;
 

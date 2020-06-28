@@ -8,7 +8,6 @@ class FeaturesSinglePopup extends StatefulWidget {
 }
 
 class _FeaturesSinglePopupState extends State<FeaturesSinglePopup> {
-
   String _fruit = 'mel';
   String _framework = 'flu';
 
@@ -31,6 +30,12 @@ class _FeaturesSinglePopupState extends State<FeaturesSinglePopup> {
           value: _framework,
           options: options.frameworks,
           modalType: SmartSelectModalType.popupDialog,
+          modalConfig: SmartSelectModalConfig(
+            constraints: BoxConstraints(maxWidth: 400),
+            style: SmartSelectModalStyle(
+              barrierColor: Colors.blue,
+            ),
+          ),
           builder: (context, state, showOption) {
             return ListTile(
               title: Text(state.title),
@@ -42,10 +47,7 @@ class _FeaturesSinglePopupState extends State<FeaturesSinglePopup> {
               ),
               leading: CircleAvatar(
                 backgroundColor: Colors.blue,
-                child: Text(
-                  '${state.valueDisplay[0]}',
-                  style: TextStyle(color: Colors.white)
-                ),
+                child: Text('${state.valueDisplay[0]}', style: TextStyle(color: Colors.white)),
               ),
               trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey),
               onTap: () => showOption(context),

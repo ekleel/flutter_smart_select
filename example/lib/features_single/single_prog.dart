@@ -9,7 +9,7 @@ class FeaturesSingleProg extends StatefulWidget {
 
 class _FeaturesSingleProgState extends State<FeaturesSingleProg> {
   String _day = 'fri';
-  String _month = 'apr';
+  // String _month = 'apr';
 
   void _showModal(BuildContext context) async {
     SmartSelect smartSelect = SmartSelect<String>.single(
@@ -19,7 +19,7 @@ class _FeaturesSingleProgState extends State<FeaturesSingleProg> {
       // onChange: (String val) {},
       onChange: (dynamic val) => setState(() => _day = val),
     );
-    bool results = await SmartSelectTrigger.showModal(context: context, smartSelect: smartSelect);
+    final results = await SmartSelectTrigger.showSmartModal(context: context, smartSelect: smartSelect);
     print('modal results: $results');
   }
 

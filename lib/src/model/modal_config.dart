@@ -5,14 +5,10 @@ import './modal_theme.dart';
 enum SmartSelectModalType { fullPage, popupDialog, bottomSheet }
 
 /// A builder for custom confirmation widget
-typedef Widget SmartSelectModalConfirmationBuilder(
-  BuildContext context,
-  Function onConfirm
-);
+typedef Widget SmartSelectModalConfirmationBuilder(BuildContext context, Function onConfirm);
 
 /// Modal configuration
 class SmartSelectModalConfig {
-
   /// Use different title with the trigger widget title
   final String title;
 
@@ -44,6 +40,10 @@ class SmartSelectModalConfig {
   /// Builder for custom confirmation widget
   final SmartSelectModalConfirmationBuilder confirmationBuilder;
 
+  final bool barrierDismissible;
+
+  final BoxConstraints constraints;
+
   /// Create modal configuration
   const SmartSelectModalConfig({
     this.title,
@@ -56,5 +56,7 @@ class SmartSelectModalConfig {
     this.style = const SmartSelectModalStyle(),
     this.headerStyle = const SmartSelectModalHeaderStyle(),
     this.confirmationBuilder,
+    this.barrierDismissible = true,
+    this.constraints,
   });
 }

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './model/option.dart';
@@ -299,14 +300,33 @@ class SmartSelect<T> extends StatelessWidget {
         );
         break;
       case SmartSelectModalType.popupDialog:
-        confirmed = await showDialog(
+        confirmed = await showModal(
           context: context,
-          builder: (_) => Dialog(
-            shape: modalConfig.style.shape,
-            backgroundColor: modalConfig.style.backgroundColor,
-            elevation: modalConfig.style.elevation,
-            child: _routeWidget,
+          configuration: FadeScaleTransitionConfiguration(
+            barrierColor: modalConfig.style.barrierColor.withOpacity(0.6),
+            barrierDismissible: modalConfig.barrierDismissible,
           ),
+          builder: (BuildContext context) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                constraints: modalConfig.constraints,
+                child: Dialog(
+                  shape: modalConfig.style.shape,
+                  backgroundColor: modalConfig.style.backgroundColor,
+                  elevation: modalConfig.style.elevation,
+                  child: _routeWidget,
+                ),
+              ),
+            ],
+          ),
+          // builder: (_) => Dialog(
+          //   shape: modalConfig.style.shape,
+          //   backgroundColor: modalConfig.style.backgroundColor,
+          //   elevation: modalConfig.style.elevation,
+          //   child: _routeWidget,
+          // ),
         );
         break;
     }
@@ -330,7 +350,7 @@ class SmartSelect<T> extends StatelessWidget {
 
 /// SmartSelectTrigger that allows you to trigger smart select without widget
 class SmartSelectTrigger {
-  static Future<List> showModal<T>({BuildContext context, SmartSelect<T> smartSelect}) async {
+  static Future<List> showSmartModal<T>({BuildContext context, SmartSelect<T> smartSelect}) async {
     bool confirmed = false;
     BuildContext _context;
 
@@ -386,13 +406,26 @@ class SmartSelectTrigger {
         );
         break;
       case SmartSelectModalType.popupDialog:
-        confirmed = await showDialog(
+        confirmed = await showModal(
           context: context,
-          builder: (_) => Dialog(
-            shape: smartSelect.modalConfig.style.shape,
-            backgroundColor: smartSelect.modalConfig.style.backgroundColor,
-            elevation: smartSelect.modalConfig.style.elevation,
-            child: _routeWidget,
+          configuration: FadeScaleTransitionConfiguration(
+            barrierColor: smartSelect.modalConfig.style.barrierColor.withOpacity(0.6),
+            barrierDismissible: smartSelect.modalConfig.barrierDismissible,
+          ),
+          builder: (BuildContext context) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                constraints: smartSelect.modalConfig.constraints,
+                child: Dialog(
+                  shape: smartSelect.modalConfig.style.shape,
+                  backgroundColor: smartSelect.modalConfig.style.backgroundColor,
+                  elevation: smartSelect.modalConfig.style.elevation,
+                  child: _routeWidget,
+                ),
+              ),
+            ],
           ),
         );
         break;

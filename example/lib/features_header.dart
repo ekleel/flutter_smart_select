@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FeaturesHeader extends StatelessWidget {
-
   final String title;
 
-  FeaturesHeader(this.title, {
+  FeaturesHeader(
+    this.title, {
     Key key,
   }) : super(key: key);
 
@@ -17,7 +17,7 @@ class FeaturesHeader extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: Theme.of(context).textTheme.body2.merge(TextStyle(color: Colors.black54)),
+        style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(color: Colors.black54)),
       ),
     );
   }
